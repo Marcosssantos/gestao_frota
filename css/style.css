@@ -1,0 +1,292 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --primary: #2c3e50;
+    --secondary: #34495e;
+    --accent: #3498db;
+    --text: #f3740c;
+    --bg: #5e7392;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    display: flex;
+    background-color: var(--bg);
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background-color: var(--primary);
+    color: var(--text);
+    position: fixed;
+}
+
+.sidebar h2 {
+    text-align: center;
+    padding: 20px 0;
+    font-size: 1.2rem;
+    border-bottom: 1px solid var(--secondary);
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li a {
+    display: block;
+    padding: 15px 25px;
+    color: var(--text);
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.sidebar ul li a:hover {
+    background-color: var(--accent);
+}
+
+/* Main Content */
+.main-content {
+    margin-left: 250px;
+    padding: 20px;
+    width: calc(100% - 250px);
+}
+
+header {
+    background: white;
+    padding: 10px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    border-radius: 8px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+/* Forms e Inputs */
+form {
+    display: grid;
+    gap: 10px;
+    max-width: 500px;
+}
+
+input, select, button {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+button {
+    background-color: var(--accent);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    background: #fff;
+    margin: 5px 0;
+    padding: 10px;
+    border-left: 4px solid var(--accent);
+}
+/* Estilo para as caixas do Dashboard */
+.stat-box {
+    background: var(--accent);
+    color: white;
+    padding: 20px;
+    border-radius: 8px;
+    flex: 1;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+/* Esconder a sidebar e botões ao imprimir o relatório */
+@media print {
+    .sidebar, button, header {
+        display: none !important;
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    .card {
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+#inputBusca {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 2px solid var(--accent);
+    font-size: 1rem;
+}
+
+#vehicle-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s;
+}
+
+#vehicle-list li:hover {
+    transform: translateX(5px);
+    background-color: #f9f9f9;
+}
+.badge-alerta {
+    background-color: #e67e22;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.6; }
+    100% { opacity: 1; }
+}
+
+.item-urgente {
+    border-left: 5px solid #e67e22 !important;
+    background-color: #fff3e0 !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.btn-mini {
+    padding: 5px 10px;
+    font-size: 0.7rem;
+    background-color: var(--primary);
+}
+
+.lista-urgente li {
+    margin-bottom: 10px;
+}
+.card-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.stat-box {
+    flex: 1;
+    min-width: 200px;
+    padding: 25px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.stat-box i {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.stat-box h2 {
+    font-size: 2.2rem;
+    margin: 5px 0;
+}
+
+.stat-box p {
+    margin: 0;
+    opacity: 0.9;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+}
+canvas {
+    max-height: 300px;
+    width: 100% !important;
+}
+/* Botões de Ação */
+.actions {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-edit { background: #f1c40f; color: #000; padding: 5px 10px; }
+.btn-delete { background: #e74c3c; color: #fff; padding: 5px 10px; }
+
+/* Badges de Vencimento */
+.badge {
+    font-size: 0.7rem;
+    padding: 3px 7px;
+    border-radius: 10px;
+    margin-left: 10px;
+}
+
+.vencido { background-color: #c0392b; color: white; }
+.alerta-venc { background-color: #f39c12; color: white; }
+
+li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.item-main {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mini-foto {
+    width: 50px;
+    height: 50px;
+    border-radius: 4px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid var(--accent);
+}
+
+.sem-foto {
+    width: 50px;
+    height: 50px;
+    background: #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    border-radius: 4px;
+}
+.login-box {
+    position: fixed;
+    inset: 0;
+    background:#2c3e50;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+}
+
+.login-box input, .login-box button {
+    padding:12px;
+    width:250px;
+}
