@@ -318,3 +318,33 @@ header {
     align-items: center;
     flex-wrap: wrap;
 }
+/* Ajustes de Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 100%;
+        height: auto;
+        position: relative;
+    }
+    .main-content {
+        margin-left: 0;
+        width: 100%;
+    }
+    .sidebar ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .sidebar ul li a {
+        padding: 10px;
+        font-size: 0.8rem;
+    }
+    .card-container {
+        flex-direction: column;
+    }
+}
+
+/* Melhoria visual dos cards */
+.stat-box {
+    margin: 10px;
+    min-width: 150px;
+}
