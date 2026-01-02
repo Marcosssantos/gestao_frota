@@ -290,3 +290,31 @@ li {
     padding:12px;
     width:250px;
 }
+/* Responsividade */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 60px;
+    }
+    .sidebar h2, .sidebar ul li a span {
+        display: none; /* Esconde texto na barra lateral em telas pequenas */
+    }
+    .main-content {
+        margin-left: 60px;
+        width: calc(100% - 60px);
+    }
+    .card-container {
+        flex-direction: column;
+        gap: 15px;
+    }
+    .stat-box {
+        width: 100%;
+    }
+}
+
+/* Ajuste do Header */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
