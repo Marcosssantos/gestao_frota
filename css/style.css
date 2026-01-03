@@ -11,7 +11,6 @@
     --text: #f3740c;
     --bg: #5e7392;
 }
-
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
@@ -290,25 +289,83 @@ li {
     padding:12px;
     width:250px;
 }
-/* Responsividade */
+
+/* Por padrão o botão hamburger fica escondido em telas maiores */
+.hamburger { display: none; }
+
+/* Responsividade - versão móvel: sidebar off-canvas + overlay */
 @media (max-width: 768px) {
+    /* Sidebar fica escondida por padrão e aparece como painel fixo quando .nav-open */
     .sidebar {
-        width: 60px;
+        display: none;
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 250px;
+        background: var(--primary);
+        color: var(--text);
+        z-index: 1100;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+        box-shadow: 2px 0 12px rgba(0,0,0,0.2);
+        padding-top: 20px;
+        overflow-y: auto;
     }
-    .sidebar h2, .sidebar ul li a span {
-        display: none; /* Esconde texto na barra lateral em telas pequenas */
+    .sidebar.nav-open { display: block; transform: translateX(0); }
+    .sidebar h2 { padding: 16px; }
+    .sidebar .nav-links ul { display:flex; flex-direction:column; gap:8px; padding: 8px 12px; }
+    .sidebar ul li a { padding: 10px 12px; display:block; }
+
+    /* Overlay que escurece o conteúdo quando o menu está aberto */
+    .nav-overlay { display: none; }
+    .nav-overlay.show { display:block; position:fixed; inset:0; background: rgba(0,0,0,0.45); z-index: 1050; }
+
+    /* Botão hamburger visível em mobile */
+    .hamburger { display: inline-flex; align-items:center; justify-content:center; background:transparent; color:var(--text); border:none; font-size:1.2rem; padding:8px; margin-right:8px; cursor:pointer; }
+
+    /* Main content ocupa toda largura */
+    .main-content { margin-left: 0; width: 100%; padding:14px; }
+
+    .card-container { flex-direction: column; gap: 15px; }
+
+    /* Form controls e botões full-width para toque */
+    button, input, select { width: 100%; box-sizing: border-box; }
+    .actions { gap:8px; }
+    .actions button { padding:10px 12px; font-size:0.95rem; }
+    .chart-container { min-height: 260px; }
+} 
+
+/* Ajustes adicionais para telas muito pequenas */
+@media (max-width: 420px) {
+    body { font-size: 0.95rem; }
+    header { padding: 12px; }
+    .card { padding: 14px; }
+    .stat-box { padding: 16px; font-size: 1rem; }
+    .user-info { display:flex; gap:8px; align-items:center; justify-content:flex-end; padding:8px 0; }
+    .actions { display:flex; gap:6px; }
+    .btn-edit, .btn-delete { font-size:1rem; padding:10px; }
+    .login-box input, .login-box button { width: calc(100% - 40px); }
+
+    /* Hamburger button */
+    .hamburger {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        color: var(--text);
+        border: none;
+        font-size: 1.2rem;
+        padding: 8px 10px;
+        margin-right: 6px;
+        cursor: pointer;
     }
-    .main-content {
-        margin-left: 60px;
-        width: calc(100% - 60px);
-    }
-    .card-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .stat-box {
-        width: 100%;
-    }
+
+    /* By default, hide nav-links to save space; show when .nav-open applied */
+    .sidebar .nav-links { display: none; width: 100%; }
+    .sidebar.nav-open .nav-links { display: block; background: var(--primary); padding: 8px 0; }
+    .sidebar .nav-links ul { display:flex; flex-direction:column; gap:6px; align-items:flex-start; padding-left: 12px; }
+    .sidebar .nav-links ul li a { padding: 8px 12px; display:block; width:100%; }
 }
 
 /* Ajuste do Header */
@@ -320,14 +377,11 @@ header {
 }
 /* Ajustes de Responsividade */
 @media (max-width: 768px) {
-    .sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-    }
     .main-content {
         margin-left: 0;
         width: 100%;
+    }
+} 
     }
     .sidebar ul {
         display: flex;
@@ -348,3 +402,22 @@ header {
     margin: 10px;
     min-width: 150px;
 }
+
+/* Toasts simples */
+.toast {
+    position: fixed;
+    right: 20px;
+    bottom: -60px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    padding: 10px 16px;
+    border-radius: 6px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+    z-index: 9999;
+}
+.toast.visible { opacity: 1; bottom: 20px; transform: translateY(0); }
+.toast.success { background: #27ae60 }
+.toast.error { background: #e74c3c }
+.toast.info { background: #3498db }
